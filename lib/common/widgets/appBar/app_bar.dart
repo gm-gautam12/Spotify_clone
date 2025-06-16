@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:soptify/common/helpers/is_dark_mode.dart';
-import 'package:soptify/presentation/auth/pages/signup_or_signin.dart';
 
 class BasicAppBar extends StatelessWidget {
   final Widget? titleLogo;
