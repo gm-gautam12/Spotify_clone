@@ -1,43 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:soptify/common/helpers/is_dark_mode.dart';
 import 'package:soptify/common/widgets/appBar/app_bar.dart';
+import 'package:soptify/common/widgets/button/basic_app_button.dart';
 import 'package:soptify/core/config/assets/app_vectors.dart';
 import 'package:soptify/core/config/theme/app_color.dart';
+import 'package:soptify/presentation/auth/pages/signin.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
   @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  bool passwordVisible = true;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: _bottomBar(),
       body: Column(
         children: [
           BasicAppBar(
             titleLogo: SvgPicture.asset(AppVectors.logo, height: 33, width: 108,),
           ),
-          _registerUser(),
-          _formData(),
+          _registerUser(context),
+          _formData(context),
         ],
       )
     );
   }
 
-  Widget _registerUser() {
+  Widget _registerUser(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 28),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             'Register',
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w700,
-              color: Colors.white
+              color: context.isDarkMode ? Colors.white : Colors.black,
             ),
           ),
-          SizedBox(height: 15,),
+          SizedBox(height: 9,),
           Text.rich(
             TextSpan(
             children: [
@@ -46,7 +55,7 @@ class SignUpPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.grey
+                  color: context.isDarkMode ? Colors.white : Colors.blueGrey,
                 )
               ),
               TextSpan(
@@ -65,26 +74,88 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
-  Widget _formData() {
+  Widget _formData(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 28),
-      child: TextField(
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.transparent,
-          contentPadding: EdgeInsets.all(30),
-          hintText: 'Full Name',
-          border: InputBorder.none,
-          enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Colors.grey), // Customize focused border if needed
-          borderRadius: BorderRadius.circular(30),
+      padding: const EdgeInsets.symmetric(horizontal: 28),
+      child: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration(
+              hintText: 'Full Name'
+            ).applyDefaults(
+              Theme.of(context).inputDecorationTheme
+            )
           ),
-          focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Colors.grey), // Customize focused border if needed
-          borderRadius: BorderRadius.circular(30),
-        ),
-        ),
+          SizedBox(height: 9,),
+          TextField(
+            decoration: InputDecoration(
+              hintText: 'Enter Email'
+            ).applyDefaults(
+              Theme.of(context).inputDecorationTheme
+            )
+          ),
+          SizedBox(height: 9,),
+          TextField(
+            obscureText: passwordVisible,
+            decoration: InputDecoration(
+              hintText: 'Password',
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    passwordVisible = !passwordVisible;
+                  });
+                },
+                icon: Icon(
+                  passwordVisible ? Icons.visibility_off : Icons.visibility,
+                ),
+              ),
+            ).applyDefaults(
+              Theme.of(context).inputDecorationTheme,
+            ),
+          ),
+          SizedBox(height: 20,),
+          BasicAppButton(
+            onPressed: () {
+              
+            },
+            title: 'Create Account',
+            height: 70,
+          ), 
+        ],
       ),
     );
   }
+
+  Widget _bottomBar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Do You Have An Account? ',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w700
+            ),
+          ),
+          TextButton(
+            onPressed: (){
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (BuildContext context) => SignInPage())
+              );
+            },
+            style: TextButton.styleFrom(
+              foregroundColor: Color(0xFF278CE8),
+              padding: EdgeInsets.symmetric(horizontal: 4,vertical: 4),
+              minimumSize: Size(0, 0),
+            ),
+             child: Text('Sign In'),
+          )
+        ],
+      ),
+    );
+  }
+
 }

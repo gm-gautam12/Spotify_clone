@@ -84,7 +84,7 @@ class AuthenticationPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (BuildContext context) => SingInPage(),
+                              builder: (BuildContext context) => SignInPage(),
                             )
                           );
                         }, 
