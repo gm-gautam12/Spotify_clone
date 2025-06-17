@@ -7,6 +7,7 @@ import 'package:soptify/core/config/theme/app_theme.dart';
 import 'package:soptify/presentation/chooseMode/bloc/theme_cubit.dart';
 import 'package:soptify/presentation/splash/pages/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:soptify/service_locator.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -19,6 +20,9 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await initalizeDependencies();
+  
   runApp(const MyApp());
 }
 
