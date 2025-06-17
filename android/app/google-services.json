@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395752194022",
+    "project_id": "soptify-3bb4f",
+    "storage_bucket": "soptify-3bb4f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395752194022:android:caac5ae8c606a9718a2027",
+        "android_client_info": {
+          "package_name": "com.example.soptify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS6WV1zmNocbpleb04i7cYLGIj-c5VkiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

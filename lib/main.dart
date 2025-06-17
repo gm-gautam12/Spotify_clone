@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:soptify/core/config/theme/app_theme.dart';
 import 'package:soptify/presentation/chooseMode/bloc/theme_cubit.dart';
 import 'package:soptify/presentation/splash/pages/splash.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +15,9 @@ Future<void> main() async {
     storageDirectory: kIsWeb
     ? HydratedStorageDirectory.web
     : HydratedStorageDirectory((await getTemporaryDirectory()).path) ,
+  );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
 }
