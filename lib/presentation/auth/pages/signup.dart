@@ -5,16 +5,26 @@ import 'package:soptify/common/widgets/appBar/app_bar.dart';
 import 'package:soptify/common/widgets/button/basic_app_button.dart';
 import 'package:soptify/core/config/assets/app_vectors.dart';
 import 'package:soptify/core/config/theme/app_color.dart';
+import 'package:soptify/data/model/auth/create_user.dart';
+import 'package:soptify/domain/usecase/auth/signup_usecase.dart';
 import 'package:soptify/presentation/auth/pages/signin.dart';
+import 'package:soptify/presentation/main/pages/main_page.dart';
+import 'package:soptify/service_locator.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  
+  final TextEditingController _fullName = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
   bool passwordVisible = true;
   @override
   Widget build(BuildContext context) {
@@ -80,6 +90,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Column(
         children: [
           TextField(
+            controller: _fullName,
             decoration: InputDecoration(
               hintText: 'Full Name'
             ).applyDefaults(
@@ -88,6 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           SizedBox(height: 9,),
           TextField(
+             controller: _email,
             decoration: InputDecoration(
               hintText: 'Enter Email'
             ).applyDefaults(
@@ -96,6 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           SizedBox(height: 9,),
           TextField(
+             controller: _password,
             obscureText: passwordVisible,
             decoration: InputDecoration(
               hintText: 'Password',
@@ -115,8 +128,28 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           SizedBox(height: 20,),
           BasicAppButton(
-            onPressed: () {
-              
+            onPressed: () async {
+              var result = await serviceLocator<SignupUsecase>().call(
+                params: CreateUser(
+                  fullName: _fullName.text.toString(),
+                  email: _email.text.toString(), 
+                  password: _password.text.toString()
+                )
+              );
+              result.fold(
+                (ifLeft){
+                  var snackbar = SnackBar(content: Text(ifLeft),behavior: SnackBarBehavior.floating,);
+                  ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                }, 
+
+                (ifRight){
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                     MaterialPageRoute(builder: (BuildContext context) => MainPageScreen()),
+                     (route) => false
+                  );
+                }
+              );
             },
             title: 'Create Account',
             height: 70,

@@ -5,7 +5,11 @@ import 'package:soptify/common/widgets/appBar/app_bar.dart';
 import 'package:soptify/common/widgets/button/basic_app_button.dart';
 import 'package:soptify/core/config/assets/app_vectors.dart';
 import 'package:soptify/core/config/theme/app_color.dart';
+import 'package:soptify/data/model/auth/signin_user.dart';
+import 'package:soptify/domain/usecase/auth/signin_usecase.dart';
 import 'package:soptify/presentation/auth/pages/signup.dart';
+import 'package:soptify/presentation/main/pages/main_page.dart';
+import 'package:soptify/service_locator.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -15,7 +19,11 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
   bool passwordVisible = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +88,7 @@ class _SignInPageState extends State<SignInPage> {
       child: Column(
         children: [
           TextField(
+            controller: _email,
             decoration: InputDecoration(
               hintText: 'Enter Email'
             ).applyDefaults(
@@ -88,6 +97,7 @@ class _SignInPageState extends State<SignInPage> {
           ),
           SizedBox(height: 9,),
           TextField(
+            controller: _password,
             obscureText: passwordVisible,
             decoration: InputDecoration(
               hintText: 'Password',
@@ -107,8 +117,27 @@ class _SignInPageState extends State<SignInPage> {
           ),
           SizedBox(height: 20,),
           BasicAppButton(
-            onPressed: () {
-              
+            onPressed: () async {
+              var result = await serviceLocator<SigninUsecase>().call(
+                params: SigninUser(
+                  email: _email.text.toString(), 
+                  password: _password.text.toString()
+                )
+              );
+              result.fold(
+                (ifLeft){
+                  var snackbar = SnackBar(content: Text(ifLeft),behavior: SnackBarBehavior.floating,);
+                  ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                }, 
+
+                (ifRight){
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                     MaterialPageRoute(builder: (BuildContext context) => MainPageScreen()),
+                     (route) => false
+                  );
+                }
+              );
             },
             title: 'Sign In',
             height: 70,
