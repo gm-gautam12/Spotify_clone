@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:soptify/data/model/auth/create_user.dart';
 import 'package:dartz/dartz.dart';
@@ -16,6 +17,8 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       email: signinUser.email,
       password: signinUser.password
       );
+
+
       return Right('Sign In was successful');
     } on FirebaseAuthException catch (e) {
         String message = '';
@@ -33,10 +36,18 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
   @override
   Future<Either> signup(CreateUser createUser) async{
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      var data = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: createUser.email,
       password: createUser.password
       );
+
+      FirebaseFirestore.instance.collection('users').add(
+        {
+          "name": createUser.fullName,
+          "email": data.user?.email
+        }
+      );
+
       return Right('Signup was successful');
     } on FirebaseAuthException catch (e) {
         String message = '';

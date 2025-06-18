@@ -8,7 +8,9 @@ class AppVectors {
   static String darkMode = '${basePath}moon$extension';
   static String topDesign = '${basePath}top$extension';
   static String bottomDesign = '${basePath}bottom$extension';
-
+  
   static String backIcon = '${basePath}back_button$extension';
+
+  static String homeTopDesign = '${basePath}home_top$extension';
 
 }

@@ -10,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:soptify/service_locator.dart';
 import 'firebase_options.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(

@@ -6,4 +6,7 @@ class AppImages {
   static String chooseModeBanner = '${basePath}choose_mode.png';
   static String authBanner = '${basePath}register.png';
 
+  //home
+  static String homeTopLadyImage = '${basePath}home_top_lady.png';
+
 }
