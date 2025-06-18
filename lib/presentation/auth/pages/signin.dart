@@ -28,14 +28,16 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: _bottomBar(),
-      body: Column(
-        children: [
-          BasicAppBar(
-            titleLogo: SvgPicture.asset(AppVectors.logo, height: 33, width: 108,),
-          ),
-          _registerUser(context),
-          _formData(context),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            BasicAppBar(
+              titleLogo: SvgPicture.asset(AppVectors.logo, height: 33, width: 108,),
+            ),
+            _registerUser(context),
+            _formData(context),
+          ],
+        ),
       )
     );
   }
@@ -126,7 +128,13 @@ class _SignInPageState extends State<SignInPage> {
               );
               result.fold(
                 (ifLeft){
-                  var snackbar = SnackBar(content: Text(ifLeft),behavior: SnackBarBehavior.floating,);
+                  var snackbar = SnackBar(
+                    content: Text(ifLeft),
+                    behavior: SnackBarBehavior.floating,
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(snackbar);
                 }, 
 

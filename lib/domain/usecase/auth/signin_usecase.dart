@@ -7,7 +7,7 @@ import 'package:soptify/service_locator.dart';
 class SigninUsecase implements UseCase<Either, SigninUser> {
   @override
   Future<Either> call({SigninUser? params}) async {
-    return serviceLocator<AuthRepository>().signin(params!);
+    return await serviceLocator<AuthRepository>().signin(params!);
   }
   
 }
