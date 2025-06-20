@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soptify/common/helpers/is_dark_mode.dart';
-import 'package:soptify/core/config/constants/appurl.dart';
-import 'package:soptify/core/config/constants/image_mapper.dart';
-import 'package:soptify/core/config/theme/app_color.dart';
 import 'package:soptify/domain/entities/song/song.dart';
 import 'package:soptify/presentation/main/bloc/new_song_cubit.dart';
 import 'package:soptify/presentation/main/bloc/new_song_state.dart';
