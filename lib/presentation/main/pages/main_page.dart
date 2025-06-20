@@ -5,6 +5,7 @@ import 'package:soptify/common/widgets/appBar/app_bar.dart';
 import 'package:soptify/core/config/assets/app_images.dart';
 import 'package:soptify/core/config/assets/app_vectors.dart';
 import 'package:soptify/core/config/theme/app_color.dart';
+import 'package:soptify/presentation/main/widgets/new_songs.dart';
 
 class MainPageScreen extends StatefulWidget {
   const MainPageScreen({super.key});
@@ -38,6 +39,18 @@ class _MainPageScreenState extends State<MainPageScreen> with SingleTickerProvid
              SizedBox(height: 100),
             _homeArtistTopCard(),
             _tabOptions(),
+            SizedBox(
+              height: 260,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  NewSongs(),
+                  Container(),
+                  Container(),
+                  Container(),
+                ]
+              ),
+            )
           ],
         ),
       )
