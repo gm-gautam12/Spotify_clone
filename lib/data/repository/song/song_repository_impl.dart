@@ -9,4 +9,9 @@ class SongRepositoryImpl extends SongReopsitory {
     return await serviceLocator<SongFirebaseService>().getNewSongs();
   }
   
+  @override
+  Future<Either> getPlayList()async {
+    return await serviceLocator<SongFirebaseService>().getPlayList();
+  }
+  
 }

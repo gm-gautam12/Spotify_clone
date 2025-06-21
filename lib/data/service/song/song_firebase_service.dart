@@ -6,6 +6,7 @@ import 'package:soptify/domain/entities/song/song.dart';
 
 abstract class SongFirebaseService {
   Future<Either>getNewSongs();
+  Future<Either>getPlayList();
 }
 
 class SongFirebaseServiceimpl extends SongFirebaseService {
@@ -25,6 +26,23 @@ class SongFirebaseServiceimpl extends SongFirebaseService {
         return left("An error occured, please try again");
     }
 
+  }
+  
+  @override
+  Future<Either> getPlayList() async {
+   try {
+     List<SongEntity> songs = [];
+     var data = await FirebaseFirestore.instance.collection('songs').orderBy('releaseDate',descending: true).get();
+
+     for(var element in data.docs){
+      var songModel = SongModel.fromJson(element.data());
+      songs.add(songModel.toEntity());
+     }
+
+     return Right(songs);
+   } catch (e) {
+       return left("An error occured, please try again");
+   }
   }
   
 }

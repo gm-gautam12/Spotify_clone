@@ -8,6 +8,7 @@ import 'package:soptify/domain/usecase/auth/signup_usecase.dart';
 import 'package:soptify/domain/usecase/auth/signin_usecase.dart';
 import 'package:soptify/domain/usecase/song/get_new_songs_usecase.dart';
 import 'package:soptify/domain/repository/song/song_reopsitory.dart';
+import 'package:soptify/domain/usecase/song/get_playlist_usecase.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -39,5 +40,9 @@ Future<void> initalizeDependencies() async {
   serviceLocator.registerSingleton<GetNewSongsUsecase>(
     GetNewSongsUsecase()
   );
+  serviceLocator.registerSingleton<GetPlayListUsecase>(
+    GetPlayListUsecase()
+  );
+
 
 }

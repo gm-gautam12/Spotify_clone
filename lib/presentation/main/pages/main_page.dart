@@ -6,6 +6,7 @@ import 'package:soptify/core/config/assets/app_images.dart';
 import 'package:soptify/core/config/assets/app_vectors.dart';
 import 'package:soptify/core/config/theme/app_color.dart';
 import 'package:soptify/presentation/main/widgets/new_songs.dart';
+import 'package:soptify/presentation/main/widgets/playlist.dart';
 
 class MainPageScreen extends StatefulWidget {
   const MainPageScreen({super.key});
@@ -27,7 +28,7 @@ class _MainPageScreenState extends State<MainPageScreen> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true, 
+      extendBodyBehindAppBar: false, 
       appBar: BasicAppBar(
         hideBack: true,
         titleLogo: SvgPicture.asset(AppVectors.logo,height: 33, width: 108,),
@@ -36,7 +37,7 @@ class _MainPageScreenState extends State<MainPageScreen> with SingleTickerProvid
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             SizedBox(height: 100),
+             SizedBox(height: 30),
             _homeArtistTopCard(),
             _tabOptions(),
             SizedBox(
@@ -45,12 +46,40 @@ class _MainPageScreenState extends State<MainPageScreen> with SingleTickerProvid
                 controller: _tabController,
                 children: [
                   NewSongs(),
-                  Container(),
-                  Container(),
-                  Container(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 80),
+                    child: Text("Coming Soon", 
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                      ), 
+                    ),
+                  ),
+                 Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 80),
+                    child: Text("Coming Soon", 
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                      ), 
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 80),
+                    child: Text("Coming Soon", 
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                      ), 
+                    ),
+                  ),
                 ]
               ),
-            )
+            ),
+            PlayList(),
           ],
         ),
       )
