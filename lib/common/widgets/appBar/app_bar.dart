@@ -3,9 +3,11 @@ import 'package:soptify/common/helpers/is_dark_mode.dart';
 
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? titleLogo;
+  final Widget? action;
   final bool hideBack;
   const BasicAppBar({
     this.titleLogo,
+    this.action,
     this.hideBack = false,
     super.key
     });
@@ -17,6 +19,9 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       centerTitle: true,
       title: titleLogo ?? Text(''),
+      actions: [
+        action ?? Container()
+      ],
       leading: hideBack ? null : IconButton(
         onPressed: (){
          Navigator.pop(context);
