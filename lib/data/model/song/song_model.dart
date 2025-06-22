@@ -9,6 +9,8 @@ class SongModel {
    Timestamp? releaseDate;
    String? url;
    String? imageUrl;
+  bool? isFavourite;
+  String? songId;
 
   SongModel(
     {
@@ -17,7 +19,9 @@ class SongModel {
       required this.duration,
       required this.releaseDate,
       required this.url,
-      required this.imageUrl
+      required this.imageUrl,
+      required this.isFavourite,
+      required this.songId
     }
   );
 
@@ -41,6 +45,8 @@ extension SongModelX on SongModel {
       releaseDate: releaseDate!, 
       url: url!,
       imageUrl: imageUrl!,
+      isFavourite: isFavourite!,
+      songId: songId!
     );
   }
 }

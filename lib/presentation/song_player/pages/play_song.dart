@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soptify/common/helpers/is_dark_mode.dart';
 import 'package:soptify/common/widgets/appBar/app_bar.dart';
+import 'package:soptify/common/widgets/favourite_button/favourite_button.dart';
 import 'package:soptify/core/config/theme/app_color.dart';
 import 'package:soptify/domain/entities/song/song.dart';
 import 'package:soptify/presentation/song_player/bloc/sound_player_cubit.dart';
@@ -91,10 +92,7 @@ class SongPlayerPage extends StatelessWidget {
             )
           ],
         ),
-        IconButton(
-        onPressed: (){}, 
-        icon: Icon(Icons.favorite_outline_outlined, color: AppColors.darkGrey,)
-        )
+        FavouriteButton(songEntity: songEntity)
       ],
     );
   }

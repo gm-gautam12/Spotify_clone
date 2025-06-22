@@ -7,6 +7,8 @@ class SongEntity {
   final Timestamp releaseDate;
   final String url;
   final String imageUrl;
+  final bool isFavourite;
+  final String songId;
 
   SongEntity({
     required this.title,
@@ -15,16 +17,7 @@ class SongEntity {
     required this.releaseDate,
     required this.url, 
     required this.imageUrl,
+    required this.isFavourite,
+    required this.songId
   });
-
-  factory SongEntity.fromJson(Map<String, dynamic> json) {
-    return SongEntity(
-      title: json['title'],
-      artist: json['artist'],
-      duration: json['duration'],
-      releaseDate: json['releaseDate'],
-      url: json['url'],
-      imageUrl: json['imageUrl'],
-    );
-  }
 }

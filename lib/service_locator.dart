@@ -6,9 +6,11 @@ import 'package:soptify/data/service/song/song_firebase_service.dart';
 import 'package:soptify/domain/repository/auth/auth_repository.dart';
 import 'package:soptify/domain/usecase/auth/signup_usecase.dart';
 import 'package:soptify/domain/usecase/auth/signin_usecase.dart';
+import 'package:soptify/domain/usecase/song/add_remove_favourite.dart';
 import 'package:soptify/domain/usecase/song/get_new_songs_usecase.dart';
 import 'package:soptify/domain/repository/song/song_reopsitory.dart';
 import 'package:soptify/domain/usecase/song/get_playlist_usecase.dart';
+import 'package:soptify/domain/usecase/song/is_favourite.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -42,6 +44,12 @@ Future<void> initalizeDependencies() async {
   );
   serviceLocator.registerSingleton<GetPlayListUsecase>(
     GetPlayListUsecase()
+  );
+  serviceLocator.registerSingleton<AddRemoveFavouriteusecase>(
+    AddRemoveFavouriteusecase()
+  );
+  serviceLocator.registerSingleton<IsFavouriteUsecase>(
+    IsFavouriteUsecase()
   );
 
 
