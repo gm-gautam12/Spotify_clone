@@ -7,7 +7,8 @@ import 'package:soptify/domain/entities/song/song.dart';
 
 class FavouriteButton extends StatelessWidget {
   final SongEntity songEntity;
-  const FavouriteButton({required this.songEntity, super.key});
+  final Function? function;
+  const FavouriteButton({required this.songEntity, super.key, this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,11 @@ class FavouriteButton extends StatelessWidget {
         builder: (context,state) {
           if(state is FavouriteButtonInitial){
             return IconButton(
-            onPressed: (){
+            onPressed: () async {
               context.read<FavouriteButtonCubit>().favouriteButtonUpdated(songEntity.songId);
+              if(function != null){
+                function!();
+              }
             }, 
             icon: Icon(
               songEntity.isFavourite ? Icons.favorite: Icons.favorite_outline_outlined,

@@ -7,6 +7,7 @@ import 'package:soptify/core/config/assets/app_vectors.dart';
 import 'package:soptify/core/config/theme/app_color.dart';
 import 'package:soptify/presentation/main/widgets/new_songs.dart';
 import 'package:soptify/presentation/main/widgets/playlist.dart';
+import 'package:soptify/presentation/profile/pages/profile.dart';
 
 class MainPageScreen extends StatefulWidget {
   const MainPageScreen({super.key});
@@ -31,6 +32,15 @@ class _MainPageScreenState extends State<MainPageScreen> with SingleTickerProvid
       extendBodyBehindAppBar: false, 
       appBar: BasicAppBar(
         hideBack: true,
+        action: IconButton(
+        onPressed: (){
+          Navigator.push(
+            context,
+           MaterialPageRoute(builder: (BuildContext context) => ProfilePage())
+          );
+        },
+         icon: Icon(Icons.person),
+        ),
         titleLogo: SvgPicture.asset(AppVectors.logo,height: 33, width: 108,),
       ),
       body: SingleChildScrollView(

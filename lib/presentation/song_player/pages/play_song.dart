@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soptify/common/helpers/is_dark_mode.dart';
@@ -22,7 +21,14 @@ class SongPlayerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BasicAppBar(
-        titleLogo: Text('Now Playing',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700, color: Color(0xFFDDDDDD)),),
+        titleLogo: Text(
+          'Now Playing',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700, 
+            color: context.isDarkMode ? Color(0xFFDDDDDD) : Colors.black,
+            ),
+          ),
         action: IconButton(
         onPressed: (){}, 
         icon: Icon(Icons.more_vert_rounded)

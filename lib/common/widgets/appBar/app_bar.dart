@@ -4,18 +4,20 @@ import 'package:soptify/common/helpers/is_dark_mode.dart';
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? titleLogo;
   final Widget? action;
+  final Color? backgroundColor;
   final bool hideBack;
   const BasicAppBar({
     this.titleLogo,
     this.action,
     this.hideBack = false,
+    this.backgroundColor,
     super.key
     });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: backgroundColor ?? Colors.transparent,
       elevation: 0,
       centerTitle: true,
       title: titleLogo ?? Text(''),

@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:soptify/common/constants/app_url.dart';
 import 'package:soptify/data/model/auth/create_user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:soptify/data/model/auth/signin_user.dart';
+import 'package:soptify/data/model/auth/user_model.dart';
+import 'package:soptify/domain/entities/auth/user.dart';
 abstract class AuthFirebaseService {
   Future<Either>signup(CreateUser createUser);
   Future<Either>signin(SigninUser signinUser);
+  Future<Either>getUser();
 }
 
 
@@ -59,6 +63,28 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
         }
 
         return Left(message);
+    }
+  }
+  
+  @override
+  Future<Either> getUser() async {
+    try {
+      FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+      FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+      var user = await firebaseFirestore.collection('users').doc(
+        firebaseAuth.currentUser?.uid
+      ).get();
+
+      UserModel userModel = UserModel.fromJson(user.data()!);
+      userModel.imageUrl = firebaseAuth.currentUser?.photoURL ?? AppUrl.profilePic;
+
+      UserEntity userEntity = userModel.toEntity();
+
+      return Right(userEntity);
+
+    } catch (e) {
+      return left("An Unexpected Error Occured");
     }
   }
 
